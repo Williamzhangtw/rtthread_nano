@@ -1,0 +1,3 @@
+[submodule "my_demo/kernel-sample"]
+	path = my_demo/kernel-sample
+	url = git@github.com:RT-Thread-packages/kernel-sample.git
