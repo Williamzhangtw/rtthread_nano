@@ -24,8 +24,15 @@
 
 #include <rtthread.h>
 #include <rtdevice.h>
-
+#include <stdio.h>
+#include "stm32f1xx.h"
 #define LED_PIN	3
+
+int fputc(int ch, FILE *file){
+    ITM_SendChar((uint32_t)ch);
+    return(ch);
+}
+
 
 int main(void)
 {

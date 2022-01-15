@@ -35,7 +35,7 @@
 
 #include <rtthread.h>
 #include <rthw.h>
-
+#include <stdio.h>
 #ifdef RT_USING_MODULE
 #include <dlmodule.h>
 #endif
@@ -1119,6 +1119,7 @@ RTM_EXPORT(rt_console_set_device);
 
 RT_WEAK void rt_hw_console_output(const char *str)
 {
+	printf("%s\n", str);
     /* empty console output */
 }
 RTM_EXPORT(rt_hw_console_output);
