@@ -92,6 +92,7 @@ void SysTick_Handler(void)
     /* leave interrupt */
     rt_interrupt_leave();
 }
+static struct rt_memheap tcm_heap; 
 
 /**
  * This function will initial STM32 board.
@@ -101,7 +102,10 @@ void rt_hw_board_init(void)
     HAL_Init();
     SystemClock_Config();
 #ifdef RT_USING_HEAP
-    rt_system_heap_init((void *)HEAP_BEGIN, (void *)HEAP_END);
+    rt_system_heap_init((void *)HEAP_BEGIN, (void *)((uint32_t)HEAP_BEGIN + 0x1000)); //4KB
+    rt_memheap_init(&tcm_heap,  "TCM" ,(void *)((uint32_t)HEAP_BEGIN + 0x1400), HEAP_END - ((uint32_t)HEAP_BEGIN + 0x1400));
+	
+	printf("rt_memheap_init size :%d\n", HEAP_END - ((uint32_t)HEAP_BEGIN + 0x1400));
 #endif
 #ifdef RT_USING_COMPONENTS_INIT
     rt_components_board_init();
